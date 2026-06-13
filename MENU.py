@@ -1,0 +1,51 @@
+#Importa el primer juego
+from JUEGO1_ORDENAR_PALABRAS import ordenar_palabras
+
+#Procedimiento para mostrar los puntajes ordenados
+def mostrar_puntajes(puntajes):
+    print("========== PUNTAJES =========")
+    for juego, puntaje in puntajes.items():
+        print(juego, ":", puntaje)
+
+#Procedimiento para mostrar el menú y seleccionar los juegos, los case, claves del diccionario y prints del menú se van a ir actualizando a medida que se carguen los nuevos juegos
+def menu():
+    puntajes = {"Ordena Palabras": 0, "Juego 2": 0, "Juego 3": 0, "Juego 4": 0, "Juego 5": 0}
+    opcion = -1
+    while opcion != 0:
+        print("====================================")
+        print("PLAY.IN EDUGAMES")
+        print("====================================")
+        print("Elija un juego")
+        print("1 - Ordena la palabra")
+        print("2 - Juego 2")
+        print("3 - Juego 3")
+        print("4 - Juego 4")
+        print("5 - Juego 5")
+        print("6 - Ver puntajes")
+        print("0 - Salir")
+        print("====================================")
+        try:
+            opcion = int(input("Ingrese una opción: "))
+            while opcion < 0 or opcion > 6:
+                opcion = int(input("Ingrese una opción válida: "))
+        except ValueError:
+            print("Debe ingresar un número.")
+            opcion = -1
+
+        match opcion:
+            case 1:
+                puntajes["Ordena Palabras"]=ordenar_palabras()
+            case 2:
+                puntajes["Juego 2"]=juego2()
+            case 3:
+                puntajes["Juego 3"]=juego3()
+            case 4:
+                puntajes["Juego 4"]=juego4()
+            case 5:
+                puntajes["Juego 5"]=juego5()
+            case 6:
+                mostrar_puntajes(puntajes)
+            case 0:
+                print("Gracias por jugar")
+#Ejecutar el menú                
+menu()

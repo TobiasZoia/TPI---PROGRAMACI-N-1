@@ -1,9 +1,8 @@
 #PRIMER JUEGO ORDENAR PALABRAS, en un diccionario en el que la clave es el nivel y en cada nivel hay otro diccionario dentro con la palabra mezclada (clave) y la palabra ordenada (valor)
 def ordenar_palabras():
-
     niveles = {1: {"gtoa": "gato", "same": "mesa"}, 2: {"saleecu": "escuela", "orrpe": "perro"}, 3: {"darutocomap": "computadora", "calotibibea": "biblioteca"}, 4: {"nrgpaamacioor": "programacion", "ocdriicanio": "diccionario"}, 5: {"drrsleaolaode": "desarrollador", "nidsuvdirae": "universidad"}}
     vidas = 3
-    puntaje = 0
+    puntaje_juego1 = 0
 
     print("=====================================================================================================================")
     print("ORDENA LA PALABRA")
@@ -36,7 +35,7 @@ def ordenar_palabras():
 
         for mezclada, palabra in niveles[nivel].items():
             print("VIDAS:", vidas)
-            print("PUNTAJE:", puntaje)
+            print("PUNTAJE:", puntaje_juego1)
             print("ORDENA LA PALABRA:")
             print(mezclada)
             intento=1
@@ -46,7 +45,7 @@ def ordenar_palabras():
                 respuesta=input("Ingrese la palabra: ").lower()
                 if respuesta==palabra:
                     puntos=4-intento
-                    puntaje+=puntos
+                    puntaje_juego1+=puntos
                     print("¡Correcto!")
                     print("Ganaste", puntos, "puntos")
                     aciertos=1
@@ -62,11 +61,9 @@ def ordenar_palabras():
                 print("La palabra correcta era:", palabra)
                 if vidas==0:
                     print("PERDISTE")
-                    print("Puntaje final:", puntaje)
-                    return puntaje
+                    print("Puntaje final:", puntaje_juego1)
+                    return puntaje_juego1
     print("¡FELICITACIONES!")
     print("Llegaste al final")
-    print("Puntaje final:", puntaje)
-    return puntaje
-
-puntaje=ordenar_palabras()
+    print("Puntaje final:", puntaje_juego1)
+    return puntaje_juego1
