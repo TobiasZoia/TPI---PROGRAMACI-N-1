@@ -12,9 +12,9 @@ def menu():
     puntajes = {"Ordena Palabras": 0, "Juego 2": 0, "Juego 3": 0, "Juego 4": 0, "Juego 5": 0}
     opcion = -1
     while opcion != 0:
-        print("====================================")
-        print("PLAY.IN EDUGAMES")
-        print("====================================")
+        print("==============================")
+        print("PLAY.IN - PLATAFORMA EDUCATIVA")
+        print("==============================")
         print("Elija un juego")
         print("1 - Ordena la palabra")
         print("2 - Juego 2")
