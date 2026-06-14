@@ -43,3 +43,4 @@ def trivia_de_geografia():
         print("Nivel: Explorador")
     else:
         print("Nivel: Experto en Geografia")
+    return puntos

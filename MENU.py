@@ -1,5 +1,6 @@
 #Importa el primer juego
 from JUEGO1_ORDENAR_PALABRAS import ordenar_palabras
+from trivia import trivia_de_geografia 
 
 #Procedimiento para mostrar los puntajes ordenados
 def mostrar_puntajes(puntajes):
@@ -9,7 +10,7 @@ def mostrar_puntajes(puntajes):
 
 #Procedimiento para mostrar el menú y seleccionar los juegos, los case, claves del diccionario y prints del menú se van a ir actualizando a medida que se carguen los nuevos juegos
 def menu():
-    puntajes = {"Ordena Palabras": 0, "Juego 2": 0, "Juego 3": 0, "Juego 4": 0, "Juego 5": 0}
+    puntajes = {"Ordena Palabras": 0, "Trivia de Geografia": 0, "Juego 3": 0, "Juego 4": 0, "Juego 5": 0}
     opcion = -1
     while opcion != 0:
         print("==============================")
@@ -17,7 +18,7 @@ def menu():
         print("==============================")
         print("Elija un juego")
         print("1 - Ordena la palabra")
-        print("2 - Juego 2")
+        print("2 - Trivia de Geografia")
         print("3 - Juego 3")
         print("4 - Juego 4")
         print("5 - Juego 5")
@@ -34,9 +35,9 @@ def menu():
 
         match opcion:
             case 1:
-                puntajes["Ordena Palabras"]=ordenar_palabras()
+                puntajes["Ordena Palabras"]= ordenar_palabras()
             case 2:
-                puntajes["Juego 2"]=juego2()
+                puntajes["Trivia de Geografia"]= trivia_de_geografia()
             case 3:
                 puntajes["Juego 3"]=juego3()
             case 4:
