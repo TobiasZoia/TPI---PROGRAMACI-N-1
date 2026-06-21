@@ -1,7 +1,7 @@
 def pasa_palabra():
     import time
 
-    def mostrar_preguntas():
+    def mostrar_preguntas(letra):
         print("\nLetra:", letra)
         print(preguntas[letra][0])
         print("1 - Responder")
@@ -29,20 +29,11 @@ def pasa_palabra():
             
         return 0
 
-    def guardar_puntaje(nombre, puntaje):
-        archivo = open("puntajes.txt", "a")
-        archivo.write(nombre)
-        archivo.write(" - ")
-        archivo.write(str(puntaje))
-        archivo.write("\n")
-        archivo.close()
-
     def quedan_preguntas(estados):
-        quedan = 0
         for letra in estados:
             if estados[letra] == 0 or estados[letra] == 3:
-                quedan = 1
-        return quedan
+                return 1
+        return 0
 
     def actualizar_rosco(rosco, estados):
         for i in range(len(rosco)):
@@ -137,14 +128,14 @@ def pasa_palabra():
             for letra in preguntas:
                 if seguir == 1:
                     if estados[letra] == 0 or estados[letra] == 3:
-                                mostrar_preguntas()
+                                mostrar_preguntas(letra)
 
                                 if seguir == 1:
                                     opcion = input("Opción: ")
 
                                 while opcion != "1" and opcion != "2" and opcion != "3":
                                     print("opcion invalida, selecione un numero")
-                                    mostrar_preguntas()
+                                    mostrar_preguntas(letra)
                                     opcion = input("Opcion: ")
 
                                 if opcion == "1":
@@ -166,7 +157,7 @@ def pasa_palabra():
                                 elif opcion == "3":
                                     seguir = 0
 
-    guardar_puntaje(nombre, puntaje_juego4)
     print("\nJuego terminado")
     print("Jugador:", nombre)
     print("Puntaje final:", puntaje_juego4)
+    return puntaje_juego4
