@@ -1,5 +1,4 @@
 
-
 def solucion(expresion):    
     
     numeros = []
@@ -76,9 +75,9 @@ def resolver_expresion(lista_numeros, operadores):
     return lista_numeros[0]
 
 
-def suma(a,b): return a+b
+def suma(a,b):  return a+b
 
-def resta(a,b):return a-b
+def resta(a,b): return a-b
 
 def division(a,b):
     #Inicializamos variables utiles
@@ -107,7 +106,30 @@ def division(a,b):
 
 
 
-def multiplicacion(a,b): return a*b
+def multiplicacion(a,b):
+    #Inicializamos variables utiles
+    resultado = 0
+    negativo = False
+    # Verificamos si uno de los numeros tiene un simbolo negativo
+    if a < 0:
+        negativo = not negativo
+    if b < 0:
+        negativo = not negativo
+    # Independientemente de que uno o dos o ninguno sea negativo, buscamos el absoluto para tener certeza
+    a,b = abs(a),abs(b)
+    #Verificamos si  se quiere realizar una division por 0, si es 0 damos un error.
+    if b == 0 or a == 0:
+        return 0
+    # En caso de que no haya una division por cero, realizamos la division
+    else:
+        for x in len(b):
+            resultado += a
+            
+    # Una vez hecha, le volvemos a dar su simbolo si es negativo, si no, se devuelve positivo.
+    if negativo:
+        return -resultado
+    else:
+        return resultado
 
 def resolver_operacion(operacion,numero_a,numero_b):
     match operacion:
@@ -193,7 +215,7 @@ def verificar_es_numero(caracter):
 
 
 
-if __name__ == "__main__":
+def menu_calculadora():
     expresion = ""
     while expresion != "salir":
         print("Si desea salir, ingrese salir.")
