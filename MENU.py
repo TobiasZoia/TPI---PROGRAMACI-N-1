@@ -2,7 +2,7 @@
 from JUEGO1_ORDENAR_PALABRAS import ordenar_palabras
 from trivia import trivia_de_geografia
 from pasa_palabra import pasa_palabra
-from Calculadora import calculadora
+from  Calculadora import menu_calculadora
 from memoria import memoria
 
 #Procedimiento para mostrar los puntajes ordenados
@@ -56,7 +56,7 @@ def menu():
                 if resultado != -1:
                     puntajes["Pasa Palabra"]= resultado
             case 5:
-                calculadora()
+                menu_calculadora()
             case 6:
                 mostrar_puntajes(puntajes)
             case 0:
