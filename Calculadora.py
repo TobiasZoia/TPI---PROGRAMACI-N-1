@@ -1,64 +1,88 @@
 
+
 def solucion(expresion):    
     
+    # Listas donde se guardan los números y operadores de la expresión
     numeros = []
     operadores = []   
+    # Variables sin uso actualmente
     acumulado = 0
-    numero_actual = 0
     indicador_negativo = 0    
+    # Número que se va armando dígito a dígito
+    numero_actual = 0
+    # Contador para recorrer la expresión carácter a carácter
     contador = 0
+    # Acumula caracteres para formar números negativos (ej: "-5")
     simbolo = ""
 
     while contador < len(expresion):
+        # Tomamos el carácter actual y lo agregamos al símbolo acumulado
         caracter = expresion[contador]
         simbolo += caracter
+        # caracter ahora apunta al símbolo acumulado, no al carácter solo
         caracter = simbolo
 
-        if verificar_es_numero(caracter):            
+        if verificar_es_numero(caracter):
+            # Si el símbolo acumulado es un número, lo concatenamos al número actual
             numero_actual = concatenar_numero(numero_actual, caracter)
+            # Reseteamos el símbolo para el próximo carácter
             simbolo = ""
            
         elif verificar_operador(caracter):  
+            # Si el operador anterior también es operador (o estamos al inicio),
+            # significa que es el signo de un número negativo, lo acumulamos
             if verificar_operador(expresion[contador-1]) or contador == 0:
                 simbolo = caracter                 
-            else:                    
-                numeros.append(numero_actual)           
+            else:
+                # Si no, el número actual está completo, lo guardamos
+                numeros.append(numero_actual)
+                # Guardamos el operador
                 operadores.append(caracter)
+                # Reseteamos para el próximo número
                 numero_actual = 0
                 simbolo = ""
 
-
-        contador +=1
+        contador += 1
             
+    # Si no se encontró ningún número, la expresión no es válida
     if numeros == []:        
         raise ValueError
 
+    # Agregamos el último número que quedó pendiente
     numeros.append(numero_actual)
-    return resolver_expresion(numeros,operadores)
-    
-
-
-
+    # Resolvemos la expresión con las listas de números y operadores
+    return resolver_expresion(numeros, operadores)
 
 def resolver_expresion(lista_numeros, operadores):
     
     # Primera pasada: multiplicación y división
-    # Inicializamos un contador para poder saber en que posicion estamos, y no sobrepasarnos.
+    # Inicializamos el contador en 0 para recorrer la lista de operadores
     contador = 0
     while contador < len(operadores):
+        # Si el operador actual es multiplicación o división (mayor precedencia)
         if operadores[contador] in ("*", "/"):
+            # Tomamos los dos números que rodean al operador
             numero_a = lista_numeros[contador]
             numero_b = lista_numeros[contador + 1]
 
-            resultado = resolver_operacion(operadores[contador], numero_a, numero_b)            
+            # Resolvemos la operación entre esos dos números
+            resultado = resolver_operacion(operadores[contador], numero_a, numero_b)
+            
+            # Reemplazamos numero_a con el resultado en la misma posición
             lista_numeros[contador] = resultado
+            # Eliminamos numero_b ya que fue consumido en la operación
             lista_numeros.pop(contador + 1)
+            # Eliminamos el operador ya que también fue consumido
             operadores.pop(contador)
+            # No incrementamos el contador porque al hacer pop
+            # el siguiente elemento ya quedó en la posición actual
             
         else:
+            # Si no es * ni /, avanzamos al siguiente operador
             contador += 1
 
     #Segunda Pasada:
+    #Misma situacion que en la parte superior
     contador = 0
     while contador < len(operadores):
         if operadores[contador] in ("+", "-"):
@@ -73,7 +97,6 @@ def resolver_expresion(lista_numeros, operadores):
             contador += 1
 
     return lista_numeros[0]
-
 
 def suma(a,b):  return a+b
 
@@ -103,8 +126,6 @@ def division(a,b):
         return -resultado
     else:
         return resultado
-
-
 
 def multiplicacion(a,b):
     #Inicializamos variables utiles
@@ -158,6 +179,7 @@ def concatenar_numero(acumulado,nuevo_digito):
 
 
 def verificar_operador(operador):
+    #Verifica si operador es un operador
     match operador:
         case "+":
             return True
