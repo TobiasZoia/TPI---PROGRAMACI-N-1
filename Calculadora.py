@@ -143,7 +143,7 @@ def multiplicacion(a,b):
         return 0
     # En caso de que no haya una division por cero, realizamos la division
     else:
-        for x in len(b):
+        for x in range(b):
             resultado += a
             
     # Una vez hecha, le volvemos a dar su simbolo si es negativo, si no, se devuelve positivo.
