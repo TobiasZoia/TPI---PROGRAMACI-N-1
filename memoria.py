@@ -1,124 +1,128 @@
-#Hecho con IA porque no sabia como hacer para que aparezcan palabras al azar y para que en un cierto tiempo determinado desaparezca
-import random
-import time
+def memoria():
 
-palabras = [
-    "SOL", "CASA", "PERRO", "FLOR", "LUNA", "TOMATE",
-    "JABON", "ELEFANTE", "TORTUGA", "CAMA", "SILLA",
-    "CAMPERA", "CARGADOR", "SANDIA", "CELULAR", "ESPEJO",
-    "GOMA", "CONEJO", "COMIDA", "AGUA", "TENEDOR",
-    "AUTO", "PELOTA", "GATO", "MANZANA", "LIBRO",
-    "COLECTIVO", "TERMO", "EQUIPO", "ANILLO", "PELICULA"
-]
+    import random
+    import time
 
-mensajes = [
-    "¡Excelente!",
-    "¡Muy bien!",
-    "¡Bravo!",
-    "¡Genial!",
-    "¡Sigue así!",
-    "¡Fabuloso!",
-    "¡Esplendido!",
-    "¡Soprendente!"
-]
+    palabras = [
+        "SOL", "CASA", "PERRO", "FLOR", "LUNA", "TOMATE",
+        "JABON", "ELEFANTE", "TORTUGA", "CAMA", "SILLA",
+        "CAMPERA", "CARGADOR", "SANDIA", "CELULAR", "ESPEJO",
+        "GOMA", "CONEJO", "COMIDA", "AGUA", "TENEDOR",
+        "AUTO", "PELOTA", "GATO", "MANZANA", "LIBRO",
+        "COLECTIVO", "TERMO", "EQUIPO", "ANILLO", "PELICULA"
+    ]
 
-def mostrar_menu():
-    print("\n==============================")
-    print("      JUEGO DE MEMORIA")
-    print("==============================")
-    print("1 - Jugar")
-    print("2 - Salir")
+    mensajes = [
+        "¡Excelente!",
+        "¡Muy bien!",
+        "¡Bravo!",
+        "¡Genial!",
+        "¡Sigue así!",
+        "¡Fabuloso!",
+        "¡Espléndido!",
+        "¡Sorprendente!"
+    ]
 
-def mostrar_palabras(lista):
-    print("\nMemoriza las palabras:\n")
+    def mostrar_menu():
+        print("\n==============================")
+        print("      JUEGO DE MEMORIA")
+        print("==============================")
+        print("1 - Jugar")
+        print("0 - Salir (Puede hacerlo en cualquier momento)")
 
-    for palabra in lista:
-        print(palabra)
+    def mostrar_palabras(lista):
+        print("\nMemoriza las palabras:\n")
 
-    # "Limpia" la pantalla por unos segundos
-    time.sleep(5)
+        for palabra in lista:
+            print(palabra)
 
-    print("\n" * 30)
+        time.sleep(5)
+        print("\n" * 30)
 
-def hacer_pregunta(lista):
-    correcta = random.choice(lista)
+    def hacer_pregunta(lista):
+        correcta = random.choice(lista)
 
-    incorrectas = []
+        incorrectas = []
 
-    while len(incorrectas) < 2:
-        palabra = random.choice(palabras)
+        while len(incorrectas) < 2:
+            palabra = random.choice(palabras)
 
-        if palabra not in lista and palabra not in incorrectas:
-            incorrectas.append(palabra)
+            if palabra not in lista and palabra not in incorrectas:
+                incorrectas.append(palabra)
 
-    opciones = [correcta] + incorrectas
-    random.shuffle(opciones)
+        opciones = [correcta] + incorrectas
+        random.shuffle(opciones)
 
-    print("¿Cuál de estas palabras apareció?\n")
+        print("¿Cuál de estas palabras apareció?\n")
 
-    print("1.", opciones[0])
-    print("2.", opciones[1])
-    print("3.", opciones[2])
+        print("1.", opciones[0])
+        print("2.", opciones[1])
+        print("3.", opciones[2])
+        print("0. Presione para volver al menú principal")
 
-    respuesta = input("\nIngrese una opción (1-3): ")
+        respuesta = input("\nIngrese una opción (1-3): ")
 
-    if respuesta == "1":
-        elegida = opciones[0]
-    elif respuesta == "2":
-        elegida = opciones[1]
-    elif respuesta == "3":
-        elegida = opciones[2]
-    else:
-        return False
+        if respuesta == "0":
+            return -1
 
-    return elegida == correcta
-
-def jugar():
-  
-    for ronda in range(1, 7):
-
-        print("\n==========")
-        print("RONDA", ronda)
-        print("==========")
-
-        seleccion = random.sample(palabras, 4)
-
-        mostrar_palabras(seleccion)
-
-        if hacer_pregunta(seleccion):
-
-            print(random.choice(mensajes))
-            puntos += 10
+        if respuesta == "1":
+            elegida = opciones[0]
+        elif respuesta == "2":
+            elegida = opciones[1]
+        elif respuesta == "3":
+            elegida = opciones[2]
 
         else:
-            print("Respuesta incorrecta.")
+            return False
 
-        print("Puntaje:", puntos)
+        return elegida == correcta
 
-    print("\n===================")
-    print("Juego terminado")
-    print("===================")
+    opcion = ""
 
-    print("Jugador:", nombre)
-    print("Puntaje final:", puntos)
+    while opcion != "0":
+        try:
+            mostrar_menu()
+            opcion = input("\nSelecciona una opción: ")
 
-opcion = ""
+            if opcion == "1":
+                        puntos = 0
 
-while opcion != "2":
+                        for ronda in range(1, 7):
 
-    mostrar_menu()
+                            print("\n==========")
+                            print("RONDA", ronda)
+                            print("==========")
 
-    try:
-        opcion = input("\nSelecciona una opción: ")
+                            seleccion = random.sample(palabras, 4)
 
-        if opcion == "1":
-            jugar()
+                            mostrar_palabras(seleccion)
 
-        elif opcion == "2":
-            print("\n¡Gracias por jugar!")
+                            resultado = hacer_pregunta(seleccion)
 
-        else:
-            print("\nOpción incorrecta.")
+                            if resultado == -1:
+                                return puntos
 
-    except ValueError:
-        print("\nError: Debe ingresar un número.")
+                            if resultado:
+                                print(random.choice(mensajes))
+                                puntos += 10
+                            else:
+                                print("Respuesta incorrecta.")
+
+                            print("Puntaje:", puntos)
+
+                        print("\n===================")
+                        print("Juego terminado")
+                        print("===================")
+                        print("Puntaje final:", puntos)
+
+                        return puntos
+
+            elif opcion == "0":
+                print("\n¡Gracias por jugar!")
+                return -1
+
+            else:
+                print("\nOpción incorrecta.")
+
+        except ValueError:
+            print("\nError: Debe ingresar un número.")
