@@ -11,7 +11,7 @@ def mostrar_puntajes(puntajes):
 
 #Procedimiento para mostrar el menú y seleccionar los juegos, los case, claves del diccionario y prints del menú se van a ir actualizando a medida que se carguen los nuevos juegos
 def menu():
-    puntajes = {"Ordena Palabras": 0, "Trivia de Geografia": 0, "Juego 3": 0, "Pasa palabra": 0, "Juego 5": 0}
+    puntajes = {"Ordena Palabras": 0, "Trivia de Geografia": 0, "Juego 3": 0, "Pasa Palabra": 0, "Juego 5": 0}
     opcion = -1
     while opcion != 0:
         print("==============================")
@@ -21,7 +21,7 @@ def menu():
         print("1 - Ordena la palabra")
         print("2 - Trivia de Geografia")
         print("3 - Juego 3")
-        print("4 - Pasa palabra")
+        print("4 - Pasa Palabra")
         print("5 - Juego 5")
         print("6 - Ver puntajes")
         print("0 - Salir")
@@ -42,7 +42,7 @@ def menu():
             case 3:
                 puntajes["Juego 3"]=juego3()
             case 4:
-                puntajes["Juego 4"]= pasa_palabra()
+                puntajes["Pasa Palabra"]= pasa_palabra()
             case 5:
                 puntajes["Juego 5"]=juego5()
             case 6:
