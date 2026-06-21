@@ -21,9 +21,12 @@ def mostrar_tiempo(inicio):
 
 def verificar(letra, respuesta, preguntas):
     respuestas_validas = preguntas[letra][1]
+
     for respuesta_correcta in respuestas_validas:
-        if respuesta.lower() == respuesta_correcta:
+        if respuesta.lower().strip() == respuesta_correcta:
             return 1
+        
+    return 0
 
 def guardar_puntaje(nombre, puntaje):
     archivo = open("puntajes.txt", "a")
@@ -160,7 +163,6 @@ while seguir == 1 and quedan_preguntas(estados) == 1:
                                 estados[letra] = 3
 
                             elif opcion == "3":
-                                guardar_puntaje(nombre,puntaje_juego4)
                                 seguir = 0
 
 guardar_puntaje(nombre, puntaje_juego4)
