@@ -74,10 +74,7 @@ def hacer_pregunta(lista):
     return elegida == correcta
 
 def jugar():
-    nombre = input("\nIngrese su nombre: ")
-
-    puntos = 0
-
+  
     for ronda in range(1, 7):
 
         print("\n==========")
