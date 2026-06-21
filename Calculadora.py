@@ -254,4 +254,5 @@ def menu_calculadora():
                 print(f"{expresion} no es un ejercicio matematico")
         except ZeroDivisionError:
             print(f"{expresion} tiene una division por 0, por cual no es valida.")
+    return expresion
         
