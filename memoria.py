@@ -60,20 +60,17 @@ def hacer_pregunta(lista):
     print("1.", opciones[0])
     print("2.", opciones[1])
     print("3.", opciones[2])
-    try:
-        respuesta = input("\nIngrese una opción (1-3): ")
+    
+    respuesta = input("\nIngrese una opción (1-3): ")
 
-        if respuesta == "1":
-            elegida = opciones[0]
-        elif respuesta == "2":
-            elegida = opciones[1]
-        elif respuesta == "3":
-            elegida = opciones[2]
-        else:
-            return False
-    except ValueError:
-        print("Error: Debe ingresar un número.")
-
+    if respuesta == "1":
+        elegida = opciones[0]
+    elif respuesta == "2":
+        elegida = opciones[1]
+    elif respuesta == "3":
+        elegida = opciones[2]
+    else:
+        return False
     return elegida == correcta
 
 def guardar_puntaje(nombre, puntos):
