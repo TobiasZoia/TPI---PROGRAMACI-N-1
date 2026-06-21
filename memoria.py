@@ -91,7 +91,7 @@ def ver_puntajes():
 
         archivo.close()
 
-    except ValueError:
+    except FileNotFoundError:
         print("\nTodavía no hay puntajes guardados.")
 
 def jugar():
