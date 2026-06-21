@@ -24,11 +24,10 @@ mensajes = [
 
 def mostrar_menu():
     print("\n==============================")
-    print("      JUEGO DE MEMORIA   ")
+    print("      JUEGO DE MEMORIA")
     print("==============================")
     print("1 - Jugar")
-    print("2 - Ver puntajes")
-    print("3 - Salir")
+    print("2 - Salir")
 
 def mostrar_palabras(lista):
     print("\nMemoriza las palabras:\n")
@@ -36,7 +35,7 @@ def mostrar_palabras(lista):
     for palabra in lista:
         print(palabra)
 
-#"Limpia" la pantalla por unos segundos 
+    # "Limpia" la pantalla por unos segundos
     time.sleep(5)
 
     print("\n" * 30)
@@ -60,7 +59,7 @@ def hacer_pregunta(lista):
     print("1.", opciones[0])
     print("2.", opciones[1])
     print("3.", opciones[2])
-    
+
     respuesta = input("\nIngrese una opción (1-3): ")
 
     if respuesta == "1":
@@ -71,28 +70,8 @@ def hacer_pregunta(lista):
         elegida = opciones[2]
     else:
         return False
+
     return elegida == correcta
-
-def guardar_puntaje(nombre, puntos):
-    archivo = open("puntajes.txt", "a")
-
-    archivo.write(nombre + " - " + str(puntos) + " puntos\n")
-
-    archivo.close()
-
-def ver_puntajes():
-    try:
-        #Abri un archivo que es para guardar los puntajes y lo cerre
-        archivo = open("puntajes.txt", "r")
-
-        print("\n====== HISTORIAL ======\n")
-
-        print(archivo.read())
-
-        archivo.close()
-
-    except FileNotFoundError:
-        print("\nTodavía no hay puntajes guardados.")
 
 def jugar():
     nombre = input("\nIngrese su nombre: ")
@@ -126,22 +105,23 @@ def jugar():
     print("Jugador:", nombre)
     print("Puntaje final:", puntos)
 
-    guardar_puntaje(nombre, puntos)
-
 opcion = ""
 
-while opcion != "3":
+while opcion != "2":
 
     mostrar_menu()
+
     try:
         opcion = input("\nSelecciona una opción: ")
+
         if opcion == "1":
             jugar()
+
         elif opcion == "2":
-            ver_puntajes()
-        elif opcion == "3":
             print("\n¡Gracias por jugar!")
+
         else:
             print("\nOpción incorrecta.")
+
     except ValueError:
         print("\nError: Debe ingresar un número.")
