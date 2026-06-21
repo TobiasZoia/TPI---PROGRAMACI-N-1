@@ -20,13 +20,13 @@ def ordenar_palabras():
     print("IMPORTANTE ESCRIBIR LA PALABRA SIN TILDES")
     print("=====================================================================================================================")
     print("1 - Comenzar juego")
-    print("0 - Volver al menú")
+    print("0 - Volver al menú (Puede hacerlo en cualquier momento)")
 
     opcion=input("Ingrese una opción: ")
     while opcion!="0" and opcion!="1":
         opcion=input("Ingrese una opción valida: ")
     if opcion=="0":
-        return 0
+        return -1
 
     for nivel in range(1, 6):
         print("==========")
@@ -43,7 +43,10 @@ def ordenar_palabras():
 
             while intento<=3 and aciertos==0:
                 respuesta=input("Ingrese la palabra: ").lower()
-                if respuesta==palabra:
+                if respuesta=="0":
+                    print("gracias por jugar")
+                    return puntaje_juego1
+                elif respuesta==palabra:
                     puntos=4-intento
                     puntaje_juego1+=puntos
                     print("¡Correcto!")
