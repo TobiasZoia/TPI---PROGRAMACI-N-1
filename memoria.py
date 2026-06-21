@@ -1,3 +1,4 @@
+#Hecho con IA porque no sabia como hacer para que aparezcan palabras al azar y para que en un cierto tiempo determinado desaparezca
 import random
 import time
 
@@ -35,9 +36,9 @@ def mostrar_palabras(lista):
     for palabra in lista:
         print(palabra)
 
+#"Limpia" la pantalla por unos segundos 
     time.sleep(5)
 
-    # "Limpia" la pantalla
     print("\n" * 30)
 
 def hacer_pregunta(lista):
@@ -84,6 +85,7 @@ def guardar_puntaje(nombre, puntos):
 
 def ver_puntajes():
     try:
+        #Abri un archivo que es para guardar los puntajes y lo cerre
         archivo = open("puntajes.txt", "r")
 
         print("\n====== HISTORIAL ======\n")
