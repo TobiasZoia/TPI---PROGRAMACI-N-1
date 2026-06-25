@@ -1,4 +1,5 @@
 #SEGUNDO JUEGO TRIVIA DE GEOGRAFIA 
+from guardado import guardar_puntaje 
 def trivia_de_geografia():
 
     niveles = { 1: {"Cuantos continentes hay?": "siete", "En que continente esta Argentina?": "america"}, 2: {"En que pais esta la Torre de Pisa": "italia", "En que pais esta el Obelisco": "argentina"}, 3: {"Capital de Argentina": "buenos aires", "Capital de Francia": "paris"}}
