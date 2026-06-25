@@ -1,4 +1,6 @@
 #PRIMER JUEGO ORDENAR PALABRAS, en un diccionario en el que la clave es el nivel y en cada nivel hay otro diccionario dentro con la palabra mezclada (clave) y la palabra ordenada (valor)
+from guardado import guardar_puntaje
+
 def ordenar_palabras():
     niveles = {1: {"gtoa": "gato", "same": "mesa"}, 2: {"saleecu": "escuela", "orrpe": "perro"}, 3: {"darutocomap": "computadora", "calotibibea": "biblioteca"}, 4: {"nrgpaamacioor": "programacion", "ocdriicanio": "diccionario"}, 5: {"drrsleaolaode": "desarrollador", "nidsuvdirae": "universidad"}}
     vidas = 3
@@ -27,6 +29,8 @@ def ordenar_palabras():
         opcion=input("Ingrese una opción valida: ")
     if opcion=="0":
         return -1
+    
+    nombre = input("Ingrese su nombre: ")
 
     for nivel in range(1, 6):
         print("==========")
@@ -45,6 +49,7 @@ def ordenar_palabras():
                 respuesta=input("Ingrese la palabra: ").lower()
                 if respuesta=="0":
                     print("gracias por jugar")
+                    guardar_puntaje("puntaje_ord_pal.txt", nombre, puntaje_juego1)
                     return puntaje_juego1
                 elif respuesta==palabra:
                     puntos=4-intento
@@ -65,8 +70,11 @@ def ordenar_palabras():
                 if vidas==0:
                     print("PERDISTE")
                     print("Puntaje final:", puntaje_juego1)
+                    guardar_puntaje("puntaje_ord_pal.txt", nombre, puntaje_juego1)
                     return puntaje_juego1
     print("¡FELICITACIONES!")
     print("Llegaste al final")
     print("Puntaje final:", puntaje_juego1)
+
+    guardar_puntaje("puntaje_ord_pal.txt", nombre, puntaje_juego1)
     return puntaje_juego1

@@ -2,18 +2,23 @@
 from JUEGO1_ORDENAR_PALABRAS import ordenar_palabras
 from trivia import trivia_de_geografia
 from pasa_palabra import pasa_palabra
-from  Calculadora import menu_calculadora
+from Calculadora import menu_calculadora
 from memoria import memoria
 
 #Procedimiento para mostrar los puntajes ordenados
-def mostrar_puntajes(puntajes):
+def mostrar_puntajes():
+    archivos = {"Ordena Palabras": "puntaje_ord_pal.txt", "Trivia de Geografia": "puntaje_trivia.txt", "Memoria": "puntaje_memoria.txt", "Pasa Palabra": "puntaje_pasapal.txt"}
     print("========== PUNTAJES =========")
-    for juego, puntaje in puntajes.items():
-        print(juego, ":", puntaje)
-
+    for juego, puntaje in archivos.items():
+        print("\n"+juego)
+        try:
+            f = open(puntaje, "r")
+            print(f.read())
+            f.close()
+        except FileNotFoundError:
+            print(juego, ": Sin puntaje")
 #Procedimiento para mostrar el menú y seleccionar los juegos, los case, claves del diccionario y prints del menú se van a ir actualizando a medida que se carguen los nuevos juegos
 def menu():
-    puntajes = {"Ordena Palabras": 0, "Trivia de Geografia": 0, "Memoria": 0, "Pasa Palabra": 0}
     opcion = -1
     while opcion != 0:
         print("==============================")
@@ -40,25 +45,17 @@ def menu():
 
         match opcion:
             case 1:
-                resultado= ordenar_palabras()
-                if resultado != -1:
-                    puntajes["Ordena Palabras"]= resultado
+                ordenar_palabras()                
             case 2:
-                resultado= trivia_de_geografia()
-                if resultado != -1:
-                    puntajes["Trivia de Geografia"]= resultado
+                trivia_de_geografia()               
             case 3:
-                resultado = memoria()
-                if resultado != -1:
-                    puntajes["Memoria"]=resultado                
+                memoria()                              
             case 4:
-                resultado=pasa_palabra()
-                if resultado != -1:
-                    puntajes["Pasa Palabra"]= resultado
+                pasa_palabra()
             case 5:
                 menu_calculadora()
             case 6:
-                mostrar_puntajes(puntajes)
+                mostrar_puntajes()
             case 0:
                 print("Gracias por jugar")
 #Ejecutar el menú
