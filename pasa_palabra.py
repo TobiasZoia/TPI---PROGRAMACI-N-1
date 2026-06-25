@@ -1,3 +1,5 @@
+from guardado import guardar_puntaje
+
 def pasa_palabra():
     import time
 
@@ -7,6 +9,7 @@ def pasa_palabra():
         print("1 - Responder")
         print("2 - Pasapalabra")
         print("3 - Salir")
+        print("0 - Volver al menú")
 
     def mostrar_rosco(rosco):
         for fila in rosco:
@@ -26,7 +29,7 @@ def pasa_palabra():
         for respuesta_correcta in respuestas_validas:
             if respuesta.lower().strip() == respuesta_correcta:
                 return 1
-            
+
         return 0
 
     def quedan_preguntas(estados):
@@ -48,19 +51,19 @@ def pasa_palabra():
                         rosco[i][j] = "?"
 
     rosco = [
-    [" "," "," "," ","A","B","C"," "," "," "," "],
-    [" "," "," ","Z"," "," "," ","D"," "," "," "],
-    [" "," ","Y"," "," "," "," "," ","E"," "," "],
-    [" ","X"," "," "," "," "," "," "," ","F"," "],
-    ["W"," "," "," "," "," "," "," "," "," ","G"],
-    ["V"," "," "," "," "," "," "," "," "," ","H"],
-    ["U"," "," "," "," "," "," "," "," "," ","I"],
-    ["T"," "," "," "," "," "," "," "," "," ","J"],
-    ["S"," "," "," "," "," "," "," "," "," ","K"],
-    [" ","R"," "," "," "," "," "," "," ","L"," "],
-    [" "," ","Q"," "," "," "," "," ","M"," "," "],
-    [" "," "," ","P"," "," "," ","N"," "," "," "],
-    [" "," "," "," ","","O","Ñ"," "," "," "," "]
+        [" "," "," "," ","A","B","C"," "," "," "," "],
+        [" "," "," ","Z"," "," "," ","D"," "," "," "],
+        [" "," ","Y"," "," "," "," "," ","E"," "," "],
+        [" ","X"," "," "," "," "," "," "," ","F"," "],
+        ["W"," "," "," "," "," "," "," "," "," ","G"],
+        ["V"," "," "," "," "," "," "," "," "," ","H"],
+        ["U"," "," "," "," "," "," "," "," "," ","I"],
+        ["T"," "," "," "," "," "," "," "," "," ","J"],
+        ["S"," "," "," "," "," "," "," "," "," ","K"],
+        [" ","R"," "," "," "," "," "," "," ","L"," "],
+        [" "," ","Q"," "," "," "," "," ","M"," "," "],
+        [" "," "," ","P"," "," "," ","N"," "," "," "],
+        [" "," "," "," ","","O","Ñ"," "," "," "," "]
     ]
 
     preguntas = {
@@ -90,7 +93,7 @@ def pasa_palabra():
         "W": ["mujer en ingles", ["woman"]],
         "X": ["instrumento musical de percusión formado por láminas de madera o metal que se golpean con baquetas", ["xilofono"]],
         "Y": ["como se dice tu/vos en ingles", ["you"]],
-        "Z": ["animal iconico del famoso cuento El Principito", ["zorro"]]                                                                    
+        "Z": ["animal iconico del famoso cuento El Principito", ["zorro"]]
     }
 
     estados = {}
@@ -101,21 +104,27 @@ def pasa_palabra():
     print("PASAPALABRA GENERAL")
     print("=====================================================================================================================")
     print("REGLAS")
-    print("- puedes pasar (2) o responder las preguntas (1), las preguntas que pases la responderas en la siguiente vuelta")
-    print("- tienes 3 minutos (180 segundos) para responder todas las preguntas")
-    print("- puedes salir del juego en cualquier momento")
-    print("- las preguntas son de cualquier materia ¡usa todo tu conocimiento!")
+    print("- puedes pasar (2) o responder las preguntas (1)")
+    print("- tienes 3 minutos (180 segundos)")
+    print("- escribe 0 en cualquier momento para volver al menú")
 
     nombre = input("Ingrese su nombre: ")
+
+    if nombre == "0":
+        return -1
+
     puntaje_juego4 = 0
     inicio = time.time()
     seguir = 1
 
     while seguir == 1 and quedan_preguntas(estados) == 1:
+
         if time.time() - inicio >= 180:
             print("\nTiempo agotado")
             seguir = 0
+
         else:
+
             actualizar_rosco(rosco, estados)
 
             print("\n==============================")
@@ -126,38 +135,52 @@ def pasa_palabra():
             mostrar_tiempo(inicio)
 
             for letra in preguntas:
+
                 if seguir == 1:
                     if estados[letra] == 0 or estados[letra] == 3:
-                                mostrar_preguntas(letra)
+                        mostrar_preguntas(letra)
+                        opcion = input("Opción: ")
 
-                                if seguir == 1:
-                                    opcion = input("Opción: ")
+                        if opcion == "0":
+                            guardar_puntaje(
+                                "puntaje_pasapal.txt", nombre, puntaje_juego4)
+                            return puntaje_juego4
 
-                                while opcion != "1" and opcion != "2" and opcion != "3":
-                                    print("opcion invalida, selecione un numero")
-                                    mostrar_preguntas(letra)
-                                    opcion = input("Opcion: ")
+                        while opcion != "1" and opcion != "2" and opcion != "3":
+                            print("opcion invalida, seleccione un numero")
+                            mostrar_preguntas(letra)
+                            opcion = input("Opcion: ")
 
-                                if opcion == "1":
-                                    respuesta = input("Respuesta: ")
+                            if opcion == "0":
+                                guardar_puntaje("puntaje_pasapal.txt", nombre, puntaje_juego4)
+                                return puntaje_juego4
 
-                                    if verificar(letra, respuesta, preguntas) == 1:
-                                        print("Correcto")
-                                        puntaje_juego4 = puntaje_juego4 + 2
-                                        estados[letra] = 1
+                        if opcion == "1":
 
-                                    else:
-                                        print("Incorrecto")
-                                        puntaje_juego4 = puntaje_juego4 - 1
-                                        estados[letra] = 2
+                            respuesta = input("Respuesta: ")
 
-                                elif opcion == "2":
-                                    estados[letra] = 3
-
-                                elif opcion == "3":
-                                    seguir = 0
+                            if respuesta == "0":
+                                guardar_puntaje(
+                                    "puntaje_pasapal.txt", nombre, puntaje_juego4)
+                                return puntaje_juego4
+                            if verificar(letra, respuesta, preguntas) == 1:
+                                print("Correcto")
+                                puntaje_juego4 += 2
+                                estados[letra] = 1
+                            else:
+                                print("Incorrecto")
+                                puntaje_juego4 -= 1
+                                estados[letra] = 2
+                        elif opcion == "2":
+                            estados[letra] = 3
+                        elif opcion == "3":
+                            seguir = 0
 
     print("\nJuego terminado")
     print("Jugador:", nombre)
     print("Puntaje final:", puntaje_juego4)
+
+    guardar_puntaje(
+        "puntaje_pasapal.txt", nombre, puntaje_juego4)
+
     return puntaje_juego4
