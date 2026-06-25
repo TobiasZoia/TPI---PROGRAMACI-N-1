@@ -1,3 +1,5 @@
+from guardado import guardar_puntaje
+
 def memoria():
 
     import random
@@ -40,6 +42,7 @@ def memoria():
         print("\n" * 30)
 
     def hacer_pregunta(lista):
+
         correcta = random.choice(lista)
 
         incorrectas = []
@@ -58,68 +61,65 @@ def memoria():
         print("1.", opciones[0])
         print("2.", opciones[1])
         print("3.", opciones[2])
-        print("0. Presione para volver al menú principal")
+        print("0. Volver al menú")
 
         respuesta = input("\nIngrese una opción (1-3): ")
 
         if respuesta == "0":
             return -1
-
         if respuesta == "1":
             elegida = opciones[0]
         elif respuesta == "2":
             elegida = opciones[1]
         elif respuesta == "3":
             elegida = opciones[2]
-
         else:
             return False
-
         return elegida == correcta
 
     opcion = ""
-
     while opcion != "0":
         try:
             mostrar_menu()
             opcion = input("\nSelecciona una opción: ")
 
-            if opcion == "1":
-                        puntos = 0
-
-                        for ronda in range(1, 7):
-
-                            print("\n==========")
-                            print("RONDA", ronda)
-                            print("==========")
-
-                            seleccion = random.sample(palabras, 4)
-
-                            mostrar_palabras(seleccion)
-
-                            resultado = hacer_pregunta(seleccion)
-
-                            if resultado == -1:
-                                return puntos
-
-                            if resultado:
-                                print(random.choice(mensajes))
-                                puntos += 10
-                            else:
-                                print("Respuesta incorrecta.")
-
-                            print("Puntaje:", puntos)
-
-                        print("\n===================")
-                        print("Juego terminado")
-                        print("===================")
-                        print("Puntaje final:", puntos)
-
-                        return puntos
-
-            elif opcion == "0":
-                print("\n¡Gracias por jugar!")
+            if opcion == "0":
                 return -1
+            elif opcion == "1":
+
+                nombre = input("Ingrese su nombre: ")
+                if nombre == "0":
+                    return -1
+                puntos = 0
+
+                for ronda in range(1, 7):
+
+                    print("\n==========")
+                    print("RONDA", ronda)
+                    print("==========")
+
+                    seleccion = random.sample(palabras, 4)
+                    mostrar_palabras(seleccion)
+                    resultado = hacer_pregunta(seleccion)
+
+                    if resultado == -1:
+                        guardar_puntaje("puntaje_memoria.txt", nombre, puntos)
+                        return puntos
+                    if resultado:
+                        print(random.choice(mensajes))
+                        puntos += 10
+                    else:
+                        print("Respuesta incorrecta.")
+
+                    print("Puntaje:", puntos)
+
+                print("\n===================")
+                print("Juego terminado")
+                print("===================")
+                print("Puntaje final:", puntos)
+
+                guardar_puntaje("puntaje_memoria.txt", nombre, puntos)
+                return puntos
 
             else:
                 print("\nOpción incorrecta.")
